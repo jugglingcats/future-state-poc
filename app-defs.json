@@ -1,5 +1,8 @@
 [
     {
         "application": "module1"
+    },
+    {
+        "application": "module2"
     }
 ]
