@@ -4,12 +4,13 @@ define(['angularAMD'], function() {
         console.log("In define phase for module1");
         $scope.msg="Hello from Module 1";
 
-        $futureState.futureState({
-            stateName: 'module1.sub',
+        $futureState.state({
+            name: 'module1.sub',
             url: '/sub',
             templateUrl: "/module1/sub.html",
-            type: 'requirejs',
-            src: 'sub.js'
+            controller: function($scope) {
+                $scope.msg="Hello from module 1 sub-state!";
+            }
         })
     }]
 });
