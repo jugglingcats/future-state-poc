@@ -4,8 +4,8 @@ define(['angularAMD', 'angular-ui-router', 'ui-router-extras', 'angular-sanitize
 
     app.controller('mainCtrl', function ($scope, $http) {
         $scope.msg = "Loaded!";
-        $http.get('apps').success(function (d) {
-            $scope.apps = d;
+        $http.get('app-defs.json').then(function (resp) {
+            $scope.apps = resp.data;
         });
 
         $scope.$on("$routeChangeSuccess", function () {
@@ -31,7 +31,6 @@ define(['angularAMD', 'angular-ui-router', 'ui-router-extras', 'angular-sanitize
             // tell requirejs to load controller
             require([futureState.src], function (controller) {
                 console.log("Resolving state: " + futureState.stateName);
-                console.log(futureState);
                 // define the full state using the loaded controller and config
                 d.resolve({
                     controller: controller,
@@ -48,10 +47,10 @@ define(['angularAMD', 'angular-ui-router', 'ui-router-extras', 'angular-sanitize
             return $http.get('app-defs.json').then(function (resp) {
                 angular.forEach(resp.data, function (fstate) {
                     console.log("Registering future state: " + fstate.application);
-                    fstate.stateName = fstate.application;
-                    fstate.urlPrefix = "/" + fstate.application;
-                    fstate.templateUrl = fstate.application + "/main.html";
-                    fstate.src = fstate.application + "/main.js";
+                    fstate.stateName = fstate.name;
+                    fstate.urlPrefix = "/" + fstate.name;
+                    fstate.templateUrl = fstate.name + "/main.html";
+                    fstate.src = fstate.name + "/main.js";
                     fstate.type = "requirejs";
                     $futureStateProvider.futureState(fstate);
                 });

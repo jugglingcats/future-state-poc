@@ -1,8 +1,10 @@
 [
     {
-        "application": "module1"
+        "name": "module1",
+        "navtitle": "Module 1"
     },
     {
-        "application": "module2"
+        "name": "module2",
+        "navtitle": "Module 2"
     }
 ]

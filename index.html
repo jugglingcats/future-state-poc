@@ -20,8 +20,8 @@
         </div>
         <div class="navbar-collapse">
             <ul class="nav navbar-nav">
-                <li ng-repeat="app in apps" ng-class="{active: app.path==current}">
-                    <a href="#/{{app.path}}">{{app.title}}</a>
+                <li ng-repeat="app in apps" ng-class="{active: app.name==current}">
+                    <a href="#/{{app.name}}">{{app.navtitle}}</a>
                 </li>
             </ul>
         </div>
