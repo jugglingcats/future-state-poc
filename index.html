@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script data-main="main.js" src="bower_components/requirejs/require.js"></script>
+    <title>Admin POC</title>
+    <link type="text/css" rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <style type="text/css">
+        .ng-cloak {
+            display: none;
+        }
+    </style>
+</head>
+<body class="ng-cloak" ng-controller="mainCtrl">
+
+<div class="navbar navbar-default navbar-static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#/">Admin POC</a>
+        </div>
+        <div class="navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li ng-repeat="app in apps" ng-class="{active: app.path==current}">
+                    <a href="#/{{app.path}}">{{app.title}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<h1>Admin Application - {{msg}}</h1>
+
+<div ui-view>Loading...</div>
+
+</body>
+</html>
