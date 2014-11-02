@@ -1,6 +1,7 @@
 define(['angularAMD'], function(angularAMD) {
   "use strict";
-  angularAMD.config(function($stateProvider) {
+  var app = angular.module("module2", []);
+  app.config(function($stateProvider) {
     $stateProvider.state("module2", {
         url: "/module2",
         template: "<a ui-sref='.sub'>gotosubstate</a> <ui-view/>"
@@ -10,4 +11,6 @@ define(['angularAMD'], function(angularAMD) {
         templateUrl: "/module2/sub.html"
     });
   });
+  angularAMD.processQueue();
+  return app;
 });

@@ -1,6 +1,7 @@
 define(['angularAMD'], function(angularAMD) {
     "use strict";
-  angularAMD.config(function($stateProvider) {
+  var app = angular.module("module1", []);
+  app.config(function($stateProvider) {
     console.log("In define phase for module1");
 
     $stateProvider.state({
@@ -19,4 +20,7 @@ define(['angularAMD'], function(angularAMD) {
       }
     })
   });
+
+  angularAMD.processQueue();
+  return app;
 });
