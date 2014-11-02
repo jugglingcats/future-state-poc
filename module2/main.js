@@ -1,13 +1,13 @@
-define(['angularAMD'], function() {
-    var app = angular.module("module2", ['ui.router', 'ngSanitize']);
-
-    app.config(function($stateProvider) {
-        // never gets called
-        console.log("init of module 2 sub")
-        $stateProvider
-            .state("module2.sub", {
-                url: "/module2/sub",
-                templateUrl: "/module2/sub.html"
-            });
+define(['angularAMD'], function(angularAMD) {
+  "use strict";
+  angularAMD.config(function($stateProvider) {
+    $stateProvider.state("module2", {
+        url: "/module2",
+        template: "<a ui-sref='.sub'>gotosubstate</a> <ui-view/>"
     });
+    $stateProvider.state("module2.sub", {
+        url: "/sub",
+        templateUrl: "/module2/sub.html"
+    });
+  });
 });

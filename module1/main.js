@@ -1,16 +1,22 @@
-define(['angularAMD'], function() {
+define(['angularAMD'], function(angularAMD) {
     "use strict";
-    return [ '$scope', '$futureState', function($scope, $futureState) {
-        console.log("In define phase for module1");
-        $scope.msg="Hello from Module 1";
+  angularAMD.config(function($stateProvider) {
+    console.log("In define phase for module1");
 
-        $futureState.state({
-            name: 'module1.sub',
-            url: '/sub',
-            templateUrl: "/module1/sub.html",
-            controller: function($scope) {
-                $scope.msg="Hello from module 1 sub-state!";
-            }
-        })
-    }]
+    $stateProvider.state({
+      name: 'module1',
+      url: '/module1',
+      templateUrl: "/module1/main.html",
+      controller: function($scope) { $scope.msg = "HELLO YES THIS IS DOG"}
+    });
+
+    $stateProvider.state({
+      name: 'module1.sub',
+      url: '/sub',
+      templateUrl: "/module1/sub.html",
+      controller: function($scope) {
+        $scope.msg="Hello from module 1 sub-state!";
+      }
+    })
+  });
 });

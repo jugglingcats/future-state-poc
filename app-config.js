@@ -25,19 +25,12 @@ define(['angularAMD', 'angular-ui-router', 'ui-router-extras', 'angular-sanitize
 
         $futureStateProvider.stateFactory('requirejs', function ($q, futureState) {
             var d = $q.defer(); // make a deferred
-
             console.log("Building promise for: " + futureState.stateName);
-
             // tell requirejs to load controller
-            require([futureState.src], function (controller) {
-                console.log("Resolving state: " + futureState.stateName);
-                // define the full state using the loaded controller and config
-                d.resolve({
-                    controller: controller,
-                    name: futureState.stateName,
-                    url: futureState.urlPrefix,
-                    templateUrl: futureState.templateUrl
-                });
+            require([futureState.src], function () {
+                console.log("Resolved state tree for: " + futureState.stateName);
+              // full state tree created by module's main.js
+              d.resolve();
             });
 
             return d.promise;
@@ -46,12 +39,12 @@ define(['angularAMD', 'angular-ui-router', 'ui-router-extras', 'angular-sanitize
         $futureStateProvider.addResolve(function ($http) {
             return $http.get('app-defs.json').then(function (resp) {
                 angular.forEach(resp.data, function (fstate) {
-                    console.log("Registering future state: " + fstate.application);
                     fstate.stateName = fstate.name;
                     fstate.urlPrefix = "/" + fstate.name;
                     fstate.templateUrl = fstate.name + "/main.html";
                     fstate.src = fstate.name + "/main.js";
                     fstate.type = "requirejs";
+                    console.log("Registering future state: " + angular.toJson(fstate));
                     $futureStateProvider.futureState(fstate);
                 });
             });
